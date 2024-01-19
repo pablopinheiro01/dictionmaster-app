@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -35,6 +36,54 @@ fun PurchaseScreen(
 ) {
     Column(
         modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column {
+
+
+            Row {
+                Box(
+                    modifier = modifier,
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    Image(
+                        modifier = modifier.fillMaxWidth(),
+                        painter = painterResource(id = R.drawable.woman_finish_screen),
+                        contentDescription = "",
+                    )
+                }
+            }
+            Row {
+                Column(
+                    modifier.offset(y = (-70).dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    LogoComponent()
+                    Column(
+                        modifier = modifier.padding(start = 15.dp, end = 15.dp, bottom = 20.dp)
+                    ) {
+                        FinalTextPurchaseComponent()
+                    }
+                }
+            }
+        }
+
+        Row(
+            modifier.padding(20.dp),
+            horizontalArrangement = Arrangement.Center
+        ){
+            DictionMasterButtonComponent(textButton = "SUBSCRIBE")
+        }
+    }
+}
+
+@Composable
+fun PurchaseScreen1(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier.fillMaxSize(),
     ) {
         Box(
             modifier = modifier,
@@ -47,20 +96,21 @@ fun PurchaseScreen(
             )
         }
         Column(
-            modifier.offset(y=(-70).dp),
+            modifier.offset(y = (-70).dp),
             verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LogoComponent()
             Column(
                 modifier = modifier.padding(start = 15.dp, end = 15.dp, bottom = 20.dp)
-            ){
+            ) {
                 FinalTextPurchaseComponent()
             }
-            DictionMasterButtonComponent(textButton = "SUBSCRIBE")
+            Row {
+                DictionMasterButtonComponent(textButton = "SUBSCRIBE")
+            }
         }
     }
-
 }
 
 @Composable
