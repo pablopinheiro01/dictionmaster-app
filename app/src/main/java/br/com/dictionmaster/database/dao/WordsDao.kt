@@ -1,4 +1,7 @@
 package br.com.dictionmaster.database.dao
 
-class WordsDao {
+import androidx.room.Dao
+
+@Dao
+interface WordsDao {
 }

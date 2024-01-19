@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,23 +37,29 @@ fun SplashScreen(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LogoComponent(modifier = modifier.weight(1f))
+            Column(
+                modifier.weight(1f),
+                verticalArrangement = Arrangement.Center
+            ){
+                LogoComponent()
+            }
             Row(
                 modifier = modifier
                     .fillMaxWidth()
                     .heightIn(100.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(bottom = 20.dp)
-                ,
-                horizontalArrangement = Arrangement.Center
-            ){
+                    .padding(bottom = 20.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.Bottom
+            ) {
                 Text(
                     text = "By Pablo Pinheiro",
                     textAlign = TextAlign.Center,
-                    fontSize = 22.sp
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Light
                 )
             }
         }
+
     }
 
 
