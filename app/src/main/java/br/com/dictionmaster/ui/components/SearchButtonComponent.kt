@@ -22,10 +22,11 @@ import br.com.dictionmaster.ui.theme.buttonColor
 @Composable
 fun DictionMasterButtonComponent(
     modifier: Modifier = Modifier,
-    textButton: String = ""
+    textButton: String = "",
+    onClickButton: () -> Unit = {}
 ) {
     Card(
-        onClick = { },
+        onClick = { onClickButton() },
         colors = CardDefaults
             .cardColors(
                 containerColor = buttonColor

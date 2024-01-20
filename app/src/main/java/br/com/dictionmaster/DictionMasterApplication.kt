@@ -1,4 +1,7 @@
 package br.com.dictionmaster
 
-class DictionMasterApplication {
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class DictionMasterApplication: Application()

@@ -28,17 +28,35 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.dictionmaster.ui.components.DictionMasterButtonComponent
 import br.com.dictionmaster.ui.theme.DictionMasterTheme
+import br.com.dictionmaster.ui.uistates.SearchUiState
+import br.com.dictionmaster.ui.viewmodels.SearchViewModel
 import br.com.dictionmaster.ui.theme.textBlue as TextColor
 
+
+@Composable
+fun SearchScreen(
+    state: SearchUiState,
+    viewModel: SearchViewModel,
+    navController: NavController
+) {
+    SearchScreen(
+        state = state,
+        onValueChangeSearchWord = { state.onValueChangedSearchWord(it) },
+        onClickSearchButton = { state.onSearchButtonClick() }
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    state: SearchUiState,
+    onValueChangeSearchWord: (value: String) -> Unit = {},
+    onClickSearchButton: () -> Unit = {}
 ) {
-    var textFieldValue by remember { mutableStateOf(TextFieldValue()) }
     var showPlaceHolder by remember { mutableStateOf(true) }
 
     Scaffold { paddingValues ->
@@ -68,10 +86,10 @@ fun SearchScreen(
                         modifier = modifier
                             .heightIn(38.dp)
                             .widthIn(174.dp),
-                        value = textFieldValue,
-                        onValueChange = {
-                            textFieldValue = it
-                            if (textFieldValue.text.isNotEmpty()) showPlaceHolder = false
+                        value = state.word,
+                        onValueChange = { valueString ->
+                            onValueChangeSearchWord(valueString)
+                            if (state.word.isNotEmpty()) showPlaceHolder = false
                         },
                         textStyle = TextStyle(
                             color = TextColor,
@@ -89,7 +107,6 @@ fun SearchScreen(
                         ),
                         placeholder = {
                             if (showPlaceHolder) {
-
                                 Text(
                                     "Type a word...",
                                     fontSize = 32.sp,
@@ -102,7 +119,10 @@ fun SearchScreen(
                 }
 
                 Row{
-                    DictionMasterButtonComponent()
+                    DictionMasterButtonComponent(
+                        onClickButton = { onClickSearchButton() },
+                        textButton = "SEARCH"
+                    )
                 }
             }
         }
@@ -114,6 +134,6 @@ fun SearchScreen(
 @Composable
 fun SearchScreenPreview() {
     DictionMasterTheme {
-        SearchScreen()
+        SearchScreen(state = SearchUiState())
     }
 }
