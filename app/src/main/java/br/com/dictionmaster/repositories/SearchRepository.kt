@@ -1,22 +1,32 @@
 package br.com.dictionmaster.repositories
 
 import android.util.Log
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import br.com.dictionmaster.database.dao.WordsDao
 import br.com.dictionmaster.database.entities.WordDetailEntity
 import br.com.dictionmaster.model.WordDetail
 import br.com.dictionmaster.model.toWordDetail
 import br.com.dictionmaster.network.services.DictionMasterService
+import br.com.dictionmaster.preferences.PreferencesKey
 import br.com.dictionmaster.util.convertFromJsonGeneric
 import br.com.dictionmaster.util.convertToJsonGeneric
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 
 class SearchRepository @Inject constructor(
     private val service: DictionMasterService,
-    private val dao: WordsDao
+    private val dao: WordsDao,
+    private val dataStore: DataStore<Preferences>
 ) {
 
     suspend fun search(word: String): List<WordDetail?> {
+
+        if(calculateSearchs()){
+            throw Exception()
+        }
 
         return try {
 
@@ -74,6 +84,20 @@ class SearchRepository @Inject constructor(
             }
 
         }
+    }
+
+    private suspend fun calculateSearchs(): Boolean{
+        dataStore.edit {
+            it[PreferencesKey.USER_QUANTITY_SEARCHS] = 1
+//            it[PreferencesKey.USER_QUANTITY_SEARCHS] = 1+(dataStore.data.first()[PreferencesKey.USER_QUANTITY_SEARCHS]?:0)
+        }
+        dataStore.data.first()[PreferencesKey.USER_QUANTITY_SEARCHS]?.let{
+            Log.i("SearchRepository", "calculateSearchs: $it")
+            if(it > 10){
+                return true
+            }
+        }
+        return false
     }
 }
 

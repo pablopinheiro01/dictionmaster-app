@@ -48,7 +48,8 @@ fun SearchScreen(
         onValueChangeSearchWord = { state.onValueChangedSearchWord(it) },
         onClickSearchButton = {
             viewModel.search()
-            if(state.onNavigateToShowResults) navController.navigateToSplashScreen()
+//            if(state.onNavigateToShowResults) navController.navigateToShowResults()
+//            if(state.onNavigateBuyApp) navController.navigateToBuyApp()
         },
 
         )

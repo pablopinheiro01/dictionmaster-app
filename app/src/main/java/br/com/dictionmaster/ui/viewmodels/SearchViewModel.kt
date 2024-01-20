@@ -50,24 +50,31 @@ class SearchViewModel @Inject constructor(
                     onLoading = true,
                 )
             }
-            val searchResult = repository.search(_uiState.value.word.firstCharToUpperCase())
-            if (searchResult.isNullOrEmpty()) {
-                _uiState.update { currentState ->
-                    currentState.copy(
-                        showError = true,
-                        onLoading = false
-                    )
+            try{
+                val searchResult = repository.search(_uiState.value.word.firstCharToUpperCase())
+                if (searchResult.isNullOrEmpty()) {
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            showError = true,
+                            onLoading = false
+                        )
+                    }
+                } else {
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            showError = false,
+                            onLoading = false,
+                            onNavigateToShowResults = true
+                        )
+                    }
                 }
-            } else {
+            }catch(e: Exception){
                 _uiState.update { currentState ->
                     currentState.copy(
-                        showError = false,
-                        onLoading = false,
-                        onNavigateToShowResults = true
+                        onNavigateBuyApp = true
                     )
                 }
             }
-
         }
     }
 

@@ -7,4 +7,5 @@ data class SearchUiState(
     val onValueChangedSearchWord: (value: String) -> Unit = {},
     val onNavigateToShowResults: Boolean = false,
     val onLoading: Boolean = false,
+    val onNavigateBuyApp: Boolean = false,
 )
