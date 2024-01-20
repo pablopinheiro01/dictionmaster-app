@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.dictionmaster.navigation.navigateToSplashScreen
 import br.com.dictionmaster.ui.components.DictionMasterButtonComponent
 import br.com.dictionmaster.ui.theme.DictionMasterTheme
 import br.com.dictionmaster.ui.uistates.SearchUiState
@@ -45,8 +46,12 @@ fun SearchScreen(
     SearchScreen(
         state = state,
         onValueChangeSearchWord = { state.onValueChangedSearchWord(it) },
-        onClickSearchButton = { state.onSearchButtonClick() }
-    )
+        onClickSearchButton = {
+            viewModel.search()
+            if(state.onNavigateToShowResults) navController.navigateToSplashScreen()
+        },
+
+        )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,7 +60,7 @@ fun SearchScreen(
     modifier: Modifier = Modifier,
     state: SearchUiState,
     onValueChangeSearchWord: (value: String) -> Unit = {},
-    onClickSearchButton: () -> Unit = {}
+    onClickSearchButton: () -> Unit = {},
 ) {
     var showPlaceHolder by remember { mutableStateOf(true) }
 
@@ -115,13 +120,24 @@ fun SearchScreen(
                                 )
                             }
                         },
+                        enabled = !state.onLoading
                     )
                 }
+                if(state.showError){
+                    Row {
+                        Text(text = "Word not found, check if it is correct.",
+                            fontSize = 12.sp,
+                            color = Color.Red,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
 
-                Row{
+                Row {
                     DictionMasterButtonComponent(
                         onClickButton = { onClickSearchButton() },
-                        textButton = "SEARCH"
+                        textButton = "SEARCH",
+                        onEnabled = !state.onLoading
                     )
                 }
             }

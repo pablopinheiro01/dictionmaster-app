@@ -21,7 +21,7 @@ object RestApiModule{
     @DictionMasterRetrofit
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://")
+            .baseUrl("https://api.dictionaryapi.dev")
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
             .build()

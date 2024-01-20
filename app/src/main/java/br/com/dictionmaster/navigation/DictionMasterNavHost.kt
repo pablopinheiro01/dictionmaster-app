@@ -11,7 +11,7 @@ fun DictionMasterNavHost(
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = splashScreenRoute
+        startDestination = searchScreenRoute
     ){
         splashScreen()
         searchScreen(navHostController)

@@ -23,14 +23,16 @@ import br.com.dictionmaster.ui.theme.buttonColor
 fun DictionMasterButtonComponent(
     modifier: Modifier = Modifier,
     textButton: String = "",
-    onClickButton: () -> Unit = {}
+    onClickButton: () -> Unit = {},
+    onEnabled: Boolean = true
 ) {
     Card(
         onClick = { onClickButton() },
         colors = CardDefaults
             .cardColors(
                 containerColor = buttonColor
-            )
+            ),
+        enabled = onEnabled
     ) {
         Row(
             modifier = modifier
@@ -43,7 +45,7 @@ fun DictionMasterButtonComponent(
                 modifier = modifier.align(Alignment.CenterVertically),
                 text = textButton,
                 fontSize = 16.sp,
-                color = Color.White,
+                color = if(onEnabled) Color.White else Color.Gray,
                 fontWeight = FontWeight.Medium
             )
         }
