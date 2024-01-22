@@ -1,11 +1,13 @@
 package br.com.dictionmaster.ui.uistates
 
-data class SearchUiState(
-    val word: String = "",
-    val showError: Boolean = false,
-    val onSearchButtonClick: () -> Unit = {},
-    val onValueChangedSearchWord: (value: String) -> Unit = {},
-    val onNavigateToShowResults: Boolean = false,
-    val onLoading: Boolean = false,
-    val onNavigateBuyApp: Boolean = false,
-)
+
+sealed class SearchUiState{
+
+    object Loading: SearchUiState()
+
+    data class SuccessSearchUiState(
+        val word: String = "",
+        val onValueChangedSearchWord: (value: String) -> Unit = {},
+    ): SearchUiState()
+
+}
