@@ -14,18 +14,20 @@ import br.com.dictionmaster.ui.theme.textBlue
 
 @Composable
 fun MeaningComponent(
-    modifier: Modifier = Modifier
+    number:String = "",
+    partOfSpeech: String = "",
+    definitions: String = ""
 ) {
     Text(
         text = buildAnnotatedString {
             this.withStyle(style = SpanStyle(color = textBlue)) {
-                append("1)")
+                append("$number)")
             }
             withStyle(style = SpanStyle(color = Color.Gray)) {
-                append(" [noun] ")
+                append(" $partOfSpeech ")
             }
             withStyle(style = SpanStyle(color = textBlue)) {
-                append("a process of teaching, training and learning, especially in schools, colleges or universities, to improve knowledge and develop skills")
+                append("$definitions")
             }
         },
         fontSize = 16.sp,

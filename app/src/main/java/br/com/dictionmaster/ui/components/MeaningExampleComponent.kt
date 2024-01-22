@@ -8,7 +8,9 @@ import androidx.compose.ui.unit.sp
 import br.com.dictionmaster.ui.theme.textBlue
 
 @Composable
-fun MeaningExampleComponent() {
+fun MeaningExampleComponent(
+    example: String = ""
+) {
     Text(
         text = "• ",
         fontSize = 16.sp,
@@ -17,7 +19,7 @@ fun MeaningExampleComponent() {
     )
 
     Text(
-        text = "first example",
+        text = example,
         fontSize = 16.sp,
         fontWeight = FontWeight.Light,
         color = textBlue
