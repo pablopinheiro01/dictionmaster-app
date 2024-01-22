@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import br.com.dictionmaster.database.entities.WordDetailEntity
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.PUT
 
 @Dao
@@ -14,6 +15,6 @@ interface WordsDao {
     fun save(wordDetailEntity: WordDetailEntity)
 
     @Query("SELECT * FROM Words WHERE word == :word")
-    suspend fun findWord(word: String): List<WordDetailEntity>
+    fun findWord(word: String): List<WordDetailEntity>?
 
 }
