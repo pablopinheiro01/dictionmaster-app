@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
@@ -19,14 +20,31 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import br.com.dictionmaster.navigation.navigateToSearchScreen
+import br.com.dictionmaster.navigation.navigateToSplashScreen
 import br.com.dictionmaster.ui.components.LogoComponent
+import kotlinx.coroutines.delay
+
+
+@Composable
+fun SplashScreen(
+    navController: NavController
+) {
+
+    SplashScreen()
+    LaunchedEffect(null){
+        delay(3000L)
+        navController.navigateToSearchScreen()
+    }
+
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier
 ) {
-
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) { paddingValues ->
@@ -59,10 +77,7 @@ fun SplashScreen(
                 )
             }
         }
-
     }
-
-
 }
 
 @Preview

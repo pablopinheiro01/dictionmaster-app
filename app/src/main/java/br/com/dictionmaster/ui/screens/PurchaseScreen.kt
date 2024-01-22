@@ -1,6 +1,7 @@
 package br.com.dictionmaster.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,23 +25,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.dictionmaster.R
+import br.com.dictionmaster.repositories.SearchRepository
 import br.com.dictionmaster.ui.components.DictionMasterButtonComponent
 import br.com.dictionmaster.ui.components.LogoComponent
 import br.com.dictionmaster.ui.theme.DictionMasterTheme
 import br.com.dictionmaster.ui.theme.textBlue
+import br.com.dictionmaster.ui.viewmodels.PurchaseScreenViewModel
 import br.com.dictionmaster.ui.theme.buttonColor as TextBlueLight
 
 @Composable
 fun PurchaseScreen(
-    modifier: Modifier = Modifier
+    viewModel: PurchaseScreenViewModel
+) {
+    PurchaseScreen(
+        onResetCounter = {
+            viewModel.cleanData()
+        }
+    )
+
+}
+
+@Composable
+fun PurchaseScreen(
+    modifier: Modifier = Modifier,
+    onResetCounter: () -> Unit = {}
 ) {
     Column(
         modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-
-
             Row {
                 Box(
                     modifier = modifier,
@@ -55,7 +69,11 @@ fun PurchaseScreen(
             }
             Row {
                 Column(
-                    modifier.offset(y = (-70).dp),
+                    modifier
+                        .offset(y = (-70).dp)
+                        .clickable {
+                            onResetCounter()
+                        },
                     verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -68,50 +86,15 @@ fun PurchaseScreen(
                 }
             }
         }
-
         Row(
             modifier.padding(20.dp),
             horizontalArrangement = Arrangement.Center
-        ){
+        ) {
             DictionMasterButtonComponent(textButton = "SUBSCRIBE")
         }
     }
 }
 
-@Composable
-fun PurchaseScreen1(
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier.fillMaxSize(),
-    ) {
-        Box(
-            modifier = modifier,
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            Image(
-                modifier = modifier.fillMaxWidth(),
-                painter = painterResource(id = R.drawable.woman_finish_screen),
-                contentDescription = "",
-            )
-        }
-        Column(
-            modifier.offset(y = (-70).dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            LogoComponent()
-            Column(
-                modifier = modifier.padding(start = 15.dp, end = 15.dp, bottom = 20.dp)
-            ) {
-                FinalTextPurchaseComponent()
-            }
-            Row {
-                DictionMasterButtonComponent(textButton = "SUBSCRIBE")
-            }
-        }
-    }
-}
 
 @Composable
 fun FinalTextPurchaseComponent(

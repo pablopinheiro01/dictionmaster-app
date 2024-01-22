@@ -1,6 +1,7 @@
 package br.com.dictionmaster.ui.screens
 
 import LanguageSelectedComponent
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,17 +25,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.com.dictionmaster.navigation.navigateToSplashScreen
+import br.com.dictionmaster.navigation.navigateToResultScreen
 import br.com.dictionmaster.ui.components.DictionMasterButtonComponent
 import br.com.dictionmaster.ui.theme.DictionMasterTheme
 import br.com.dictionmaster.ui.uistates.SearchUiState
 import br.com.dictionmaster.ui.viewmodels.SearchViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import br.com.dictionmaster.ui.theme.textBlue as TextColor
 
 
@@ -43,16 +46,17 @@ fun SearchScreen(
     viewModel: SearchViewModel,
     navController: NavController
 ) {
+
     SearchScreen(
         state = state,
-        onValueChangeSearchWord = { state.onValueChangedSearchWord(it) },
-        onClickSearchButton = {
-            viewModel.search()
-//            if(state.onNavigateToShowResults) navController.navigateToShowResults()
-//            if(state.onNavigateBuyApp) navController.navigateToBuyApp()
+        onValueChangeSearchWord = {
+            viewModel.onValueChangedSearchWord(it)
         },
-
-        )
+        onClickSearchButton = {
+            viewModel.changed()
+            navController.navigateToResultScreen(viewModel.wordMutableStateFlow.value)
+        },
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,8 +67,6 @@ fun SearchScreen(
     onValueChangeSearchWord: (value: String) -> Unit = {},
     onClickSearchButton: () -> Unit = {},
 ) {
-    var showPlaceHolder by remember { mutableStateOf(true) }
-
     Scaffold { paddingValues ->
         Column(
             modifier
@@ -85,72 +87,64 @@ fun SearchScreen(
                 ) {
                     LanguageSelectedComponent()
                 }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    OutlinedTextField(
-                        modifier = modifier
-                            .heightIn(38.dp)
-                            .widthIn(174.dp),
-                        value = state.word,
-                        onValueChange = { valueString ->
-                            onValueChangeSearchWord(valueString)
-                            if (state.word.isNotEmpty()) showPlaceHolder = false
-                        },
-                        textStyle = TextStyle(
-                            color = TextColor,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 32.sp,
-                            textAlign = TextAlign.Center
-                        ),
-                        singleLine = true,
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            containerColor = Color.Transparent,
-                            focusedBorderColor = Color.Transparent,
-                            disabledBorderColor = Color.Transparent,
-                            textColor = TextColor,
-                            unfocusedBorderColor = Color.Transparent,
-                        ),
-                        placeholder = {
-                            if (showPlaceHolder) {
-                                Text(
-                                    "Type a word...",
+                when (state) {
+                    is SearchUiState.SuccessSearchUiState -> {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            OutlinedTextField(
+                                modifier = modifier
+                                    .heightIn(38.dp)
+                                    .widthIn(174.dp),
+                                value = state.word,
+                                onValueChange = { valueString ->
+                                    onValueChangeSearchWord(valueString)
+                                },
+                                textStyle = TextStyle(
+                                    color = TextColor,
+                                    fontWeight = FontWeight.Bold,
                                     fontSize = 32.sp,
-                                    fontWeight = FontWeight.ExtraLight,
-                                    color = TextColor
+                                    textAlign = TextAlign.Center
+                                ),
+                                singleLine = true,
+                                colors = TextFieldDefaults.outlinedTextFieldColors(
+                                    containerColor = Color.Transparent,
+                                    focusedBorderColor = Color.Transparent,
+                                    disabledBorderColor = Color.Transparent,
+                                    textColor = TextColor,
+                                    unfocusedBorderColor = Color.Transparent,
+                                ),
+                                placeholder = {
+                                        Text(
+                                            "Type a word...",
+                                            fontSize = 32.sp,
+                                            fontWeight = FontWeight.ExtraLight,
+                                            color = TextColor
+                                        )
+
+                                },
+                            )
+                        }
+                        if(state.word.isNotEmpty() && state.word.isNotBlank()){
+                            Row {
+                                DictionMasterButtonComponent(
+                                    onClickButton = { onClickSearchButton() },
+                                    textButton = "SEARCH",
                                 )
                             }
-                        },
-                        enabled = !state.onLoading
-                    )
-                }
-                if(state.showError){
-                    Row {
-                        Text(text = "Word not found, check if it is correct.",
-                            fontSize = 12.sp,
-                            color = Color.Red,
-                            fontWeight = FontWeight.SemiBold
-                        )
+                        }
                     }
-                }
-
-                Row {
-                    DictionMasterButtonComponent(
-                        onClickButton = { onClickSearchButton() },
-                        textButton = "SEARCH",
-                        onEnabled = !state.onLoading
-                    )
+                    else -> {}
                 }
             }
         }
     }
 }
 
-
 @Preview
 @Composable
 fun SearchScreenPreview() {
     DictionMasterTheme {
-        SearchScreen(state = SearchUiState())
+        SearchScreen(state = SearchUiState.SuccessSearchUiState())
     }
 }
