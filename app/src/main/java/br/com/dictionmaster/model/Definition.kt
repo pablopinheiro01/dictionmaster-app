@@ -3,8 +3,8 @@ package br.com.dictionmaster.model
 import br.com.dictionmaster.network.data.DefinitionResponse
 
 data class Definition(
-    val definition: String,
-    val example: String,
+    val definition: String? = null,
+    val example: String? = null,
     val synonyms: List<String>?,
     val antonyms: List<String>?
 )
