@@ -6,9 +6,13 @@ import androidx.navigation.compose.composable
 import br.com.dictionmaster.ui.screens.SplashScreen
 
 const val splashScreenRoute = "splashScreen"
-fun NavGraphBuilder.splashScreen(){
+fun NavGraphBuilder.splashScreen(
+    navController: NavController
+){
     composable(splashScreenRoute){
-        SplashScreen()
+        SplashScreen(
+            navController = navController
+        )
     }
 }
 
