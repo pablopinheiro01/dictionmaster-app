@@ -27,7 +27,7 @@ class SearchRepository @Inject constructor(
 
     suspend fun search(word: String): List<WordDetail> {
 
-        if(calculateSearchs()){
+        if(calculateSearches()){
             throw AllAttemptsMadeBuyAppException()
         }
 
@@ -62,6 +62,7 @@ class SearchRepository @Inject constructor(
     }
 
     private suspend fun searchApi(word: String): List<WordDetail> {
+        countableSumSearchesMade()
         return service.search(word).let { response ->
             when {
                 response.isSuccessful -> {
@@ -100,10 +101,8 @@ class SearchRepository @Inject constructor(
         }
     }
 
-    suspend fun calculateSearchs(): Boolean {
-        plusValue()
-        return verifyIfUserCanContinueUseApp()
-    }
+    private suspend fun calculateSearches(): Boolean = verifyIfUserCanContinueUseApp()
+
 
     private suspend fun verifyIfUserCanContinueUseApp(): Boolean {
         dataStore.data.first()[PreferencesKey.USER_QUANTITY_SEARCHS]?.let {
@@ -114,7 +113,7 @@ class SearchRepository @Inject constructor(
             return false
     }
 
-    private suspend fun plusValue() {
+    private suspend fun countableSumSearchesMade() {
         dataStore.edit {
             it[PreferencesKey.USER_QUANTITY_SEARCHS] =
                 1 + (dataStore.data.first()[PreferencesKey.USER_QUANTITY_SEARCHS] ?: 0)
