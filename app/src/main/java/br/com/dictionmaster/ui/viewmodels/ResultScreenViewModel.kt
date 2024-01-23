@@ -39,7 +39,7 @@ class ResultScreenViewModel @Inject constructor(
         }
     }
 
-    private fun search() {
+    fun search() {
         viewModelScope.launch(Dispatchers.IO){
             wordStateHandler?.let { word ->
                 try {

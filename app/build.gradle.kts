@@ -77,10 +77,12 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
     // To use Kotlin Symbolic Processing (KSP)
     ksp("androidx.room:room-compiler:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("com.google.dagger:hilt-android:2.44")
+
     kapt("com.google.dagger:hilt-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
@@ -88,6 +90,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+    testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("app.cash.turbine:turbine:1.0.0")
 
 
 }
