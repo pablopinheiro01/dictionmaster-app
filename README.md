@@ -12,10 +12,17 @@ The requiriments:
   
 - When you search for the same word that you previously searched, I won't count it as a new search.
 
+
 - When you tap the audio icon, I will play a sound related to this word.
 
 
 See the recorded Screens
 
+User Flow
+
+https://github.com/pablopinheiro01/dictionmaster-app/assets/34134071/9d81f320-9647-495b-8a99-90d8fd427174
+
+
+Purchase Screen
 
 [purchase_app.webm](https://github.com/pablopinheiro01/dictionmaster-app/assets/34134071/e657355f-4460-461b-a200-93ca032c3612)
