@@ -8,14 +8,10 @@ import br.com.dictionmaster.ui.screens.PurchaseScreen
 import br.com.dictionmaster.ui.viewmodels.PurchaseScreenViewModel
 
 const val purchaseScreenRoute = "purchaseScreen"
-fun NavGraphBuilder.purchaseScreen(
-    navController: NavController
-) {
+fun NavGraphBuilder.purchaseScreen() {
     composable(purchaseScreenRoute) {
 
         val viewModel = hiltViewModel<PurchaseScreenViewModel>()
-//        val state by viewModel.uiState.collectAsState()
-//        val context = LocalContext.current
 
         PurchaseScreen(
             viewModel = viewModel

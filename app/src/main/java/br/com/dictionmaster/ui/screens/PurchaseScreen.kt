@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -90,7 +91,7 @@ fun PurchaseScreen(
             modifier.padding(20.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            DictionMasterButtonComponent(textButton = "SUBSCRIBE")
+            DictionMasterButtonComponent(textButton = stringResource(id = R.string.button_subscribe))
         }
     }
 }
@@ -107,35 +108,38 @@ fun FinalTextPurchaseComponent(
                     color = textBlue,
                 )
             ) {
-                append("Subscribe now to get ")
+                append(stringResource(id = R.string.subscribe_text_1))
             }
             withStyle(
                 style = SpanStyle(
                     color = TextBlueLight,
                 )
             ) {
-                append("unlimited ")
+                append(" ")
+                append(stringResource(id = R.string.subscribe_text_2))
             }
             withStyle(
                 style = SpanStyle(
                     color = textBlue,
                 )
             ) {
-                append("searches and full access to ")
+                append(" ")
+                append(stringResource(id = R.string.subscribe_text_3))
             }
             withStyle(
                 style = SpanStyle(
                     color = TextBlueLight,
                 )
             ) {
-                append("all features")
+                append(" ")
+                append(stringResource(id = R.string.subscribe_text_4))
             }
             withStyle(
                 style = SpanStyle(
                     color = textBlue,
                 )
             ) {
-                append(".")
+                append(stringResource(id = R.string.dot_final))
             }
         },
         fontSize = 20.sp,
@@ -150,26 +154,29 @@ fun FinalTextPurchaseComponent(
                     fontWeight = FontWeight.SemiBold
                 )
             ) {
-                append("Try 7 Days Free, ")
+                append(stringResource(id = R.string.subscribe_try_1))
             }
             withStyle(
                 style = SpanStyle(
                     fontWeight = FontWeight.Light
                 )
             ) {
-                append("then only")
+                append(" ")
+                append(stringResource(id = R.string.subscribe_try_2))
             }
             withStyle(
                 style = SpanStyle(
                     fontWeight = FontWeight.SemiBold
                 )
             ) {
-                append(" $19,99 ")
+                append(" ")
+                append(stringResource(id = R.string.subscribe_try_value))
             }
             withStyle(
                 style = SpanStyle(fontWeight = FontWeight.Light)
             ) {
-                append("per year. Cancel anytime.")
+                append(" ")
+                append(stringResource(id = R.string.subscribe_final))
             }
         },
         fontSize = 16.sp,

@@ -1,6 +1,5 @@
 package br.com.dictionmaster.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,11 +19,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.dictionmaster.R
 import br.com.dictionmaster.model.Definition
 import br.com.dictionmaster.model.Meaning
 import br.com.dictionmaster.model.Phoneme
@@ -37,7 +38,6 @@ import br.com.dictionmaster.ui.components.PhoneticAudioComponent
 import br.com.dictionmaster.ui.theme.DictionMasterTheme
 import br.com.dictionmaster.ui.theme.textBlue
 import br.com.dictionmaster.ui.uistates.ResultScreenUiState
-import br.com.dictionmaster.ui.viewmodels.ResultScreenViewModel
 import br.com.dictionmaster.ui.theme.textBlue as TextBlueColor
 
 @Composable
@@ -82,22 +82,24 @@ fun ResultScreen(
                             modifier = modifier
                                 .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
                         ) {
-                            Text(
-                                modifier = modifier.padding(bottom = 10.dp),
-                                text = "That's it for \"${state.listWords.first()?.word}\" !",
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = TextBlueColor
-                            )
+                            state.listWords.first()?.word?.let { string ->
+                                Text(
+                                    modifier = modifier.padding(bottom = 10.dp),
+                                    text = stringResource(id = R.string.result_screen_1, string),
+                                    fontSize = 24.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextBlueColor
+                                )
+                            }
                             Text(
                                 modifier = modifier.padding(bottom = 15.dp),
-                                text = "Try another search now!",
+                                text = stringResource(id = R.string.result_screen_2),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Light,
                                 color = TextBlueColor
                             )
                             DictionMasterButtonComponent(
-                                textButton = "NEW SEARCH",
+                                textButton = stringResource(id = R.string.new_search),
                                 onClickButton = { onClickButton() },
                             )
                         }
@@ -125,13 +127,13 @@ fun ResultScreen(
                     )
                 ) {
                     Text(
-                        text = "Word not found, check if it is correct.",
+                        text = stringResource(id = R.string.result_screen_3),
                         fontSize = 16.sp,
                         color = Color.Red,
                         fontWeight = FontWeight.SemiBold
                     )
                     DictionMasterButtonComponent(
-                        textButton = "NEW SEARCH",
+                        textButton = stringResource(id = R.string.new_search),
                         onClickButton = { onClickButton() },
                     )
                 }
@@ -170,7 +172,8 @@ fun ResultScreen(
                             ) {
                                 PhoneticAudioComponent(
                                     phonetic = wordDetailItem.phonetic,
-                                    audioLink = wordDetailItem.phonetics?.last()?.audio ?: "")
+                                    audioLink = wordDetailItem.phonetics?.last()?.audio ?: ""
+                                )
                             }
                         }
 

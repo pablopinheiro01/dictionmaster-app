@@ -16,6 +16,6 @@ fun DictionMasterNavHost(
         splashScreen(navHostController)
         searchScreen(navHostController)
         resultScreen(navHostController)
-        purchaseScreen(navHostController)
+        purchaseScreen()
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -21,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.dictionmaster.R
 import br.com.dictionmaster.navigation.navigateToSearchScreen
 import br.com.dictionmaster.navigation.navigateToSplashScreen
 import br.com.dictionmaster.ui.components.LogoComponent
@@ -70,7 +72,7 @@ fun SplashScreen(
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(
-                    text = "By Pablo Pinheiro",
+                    text = stringResource(id = R.string.developer),
                     textAlign = TextAlign.Center,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Light

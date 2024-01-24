@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">DictionMaster</string>
+    <string name="buy_app">Buy App</string>
+    <string name="english_selected">ENGLISH</string>
+    <string name="book_logo">book logo</string>
+    <string name="title_logo">title logo</string>
+    <string name="text_mark">• </string>
+    <string name="button_subscribe">SUBSCRIBE</string>
+    <string name="button_search">SEARCH</string>
+
+    <!-- Purchase Screen -->
+    <string name="subscribe_text_1">Subscribe now to get </string>
+    <string name="subscribe_text_2">unlimite</string>
+    <string name="subscribe_text_3">searches and full access to</string>
+    <string name="subscribe_text_4">all features</string>
+    <string name="dot_final">.</string>
+    <string name="subscribe_try_1">Try 7 Days Free,</string>
+    <string name="subscribe_try_2">then only</string>
+    <string name="subscribe_try_value">$19,99</string>
+    <string name="subscribe_final">per year. Cancel anytime.</string>
+
+    <!-- Result Screen -->
+    <string name="result_screen_1">That\'s it for %s !</string>
+    <string name="result_screen_2">Try another search now!</string>
+    <string name="new_search">NEW SEARCH</string>
+    <string name="result_screen_3">Word not found, check if it is correct.</string>
+
+    <!-- Search Screen -->
+    <string name="search_screen_type_word">Type a word...</string>
+
+    <string name="developer">By Pablo Pinheiro</string>
+
 </resources>

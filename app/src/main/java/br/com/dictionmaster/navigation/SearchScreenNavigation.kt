@@ -18,7 +18,6 @@ fun NavGraphBuilder.searchScreen(
 
         val viewModel = hiltViewModel<SearchViewModel>()
         val state by viewModel.uiState.collectAsState()
-        val context = LocalContext.current
 
         SearchScreen(
             state = state,

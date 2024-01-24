@@ -43,7 +43,7 @@ class ResultScreenViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO){
             wordStateHandler?.let { word ->
                 try {
-                    repository.search(word)?.let { listWord ->
+                    repository.search(word).let { listWord ->
                         if(listWord.isNullOrEmpty()){
                             _uiState.update { ResultScreenUiState.Error }
                         }else{

@@ -82,7 +82,6 @@ fun PhoneticAudioComponent(
 fun PhoneticAudioComponentPreview() {
     DictionMasterTheme {
         Surface {
-
             PhoneticAudioComponent(phonetic = "/ˌɛdjʊˈkeɪʃn̩/")
         }
     }

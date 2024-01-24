@@ -54,7 +54,7 @@ class SearchRepository @Inject constructor(
         listWordDetailEntity: WordDetailEntity,
         listReturned: MutableList<WordDetail>
     ): MutableList<WordDetail> {
-        listWordDetailEntity?.let { detailEntity ->
+        listWordDetailEntity.let { detailEntity ->
             val itemConverted = convertFromJsonGenericList<WordDetail>(detailEntity.json)
             listReturned.addAll(itemConverted ?: emptyList())
         }

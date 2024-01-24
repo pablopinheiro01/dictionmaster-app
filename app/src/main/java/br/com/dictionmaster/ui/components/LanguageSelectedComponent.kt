@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,11 +45,11 @@ fun LanguageSelectedComponent(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.england),
-                contentDescription = "",
+                contentDescription = stringResource(id = R.string.english_selected),
             )
             Spacer(modifier = modifier.widthIn(5.dp))
             Text(
-                text = "ENGLISH",
+                text = stringResource(id = R.string.english_selected),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Light,
                 color = textBlue
