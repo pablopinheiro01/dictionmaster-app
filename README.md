@@ -15,6 +15,7 @@ The requiriments:
 
 - When you tap the audio icon, I will play a sound related to this word.
 
+#Attention: In case you search for ten new words, I will display the purchase screen. To reset the count, touch the book picture and close app.
 
 See the recorded Screens
 
