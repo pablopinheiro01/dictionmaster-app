@@ -26,3 +26,8 @@ https://github.com/pablopinheiro01/dictionmaster-app/assets/34134071/9d81f320-96
 Purchase Screen
 
 [purchase_app.webm](https://github.com/pablopinheiro01/dictionmaster-app/assets/34134071/e657355f-4460-461b-a200-93ca032c3612)
+
+
+Architecture model basics
+
+<img width="681" alt="image" src="https://github.com/pablopinheiro01/dictionmaster-app/assets/34134071/6d25cc2e-70d3-4bcf-8137-5e90ff915be0">
